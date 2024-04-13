@@ -91,7 +91,6 @@ mtk-mmc.ko
 leds-ktz8863a.ko
 panel-l16-42-02-0a-dsc-vdo.ko
 panel-l16-36-02-0b-dsc-vdo.ko
-hwconf_manager.ko
 phy-mtk-ufs.ko
 rpmb.ko
 rpmb-mtk.ko
