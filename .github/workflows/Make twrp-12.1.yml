@@ -31,12 +31,6 @@ jobs:
     - name: Check Out
       uses: actions/checkout@main
 
-    - name: Set Variables
-      run: |
-        set -e
-        echo "::set-output name=date::$(date +%F)"
-      id: var
-
     - name: Prepare Environment
       run: |
         set -e
