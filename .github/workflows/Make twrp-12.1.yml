@@ -6,15 +6,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # runs-on: ubuntu-18.04
     steps:
     - name: Remove Useless Package
       run: |
         set -e
         docker rmi `docker images -q`
         sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/sudo apt/sources.list.d
+        sudo apt update
         sudo apt -y purge azure-cli ghc* zulu* llvm* firefox google* dotnet* powershell openjdk* mysql* php*
-        # sudo apt -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
+        sudo apt -y install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libelf-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev git device-tree-compiler lz4 xz-utils zlib1g-dev openjdk-17-jdk gcc g++ python3 python-is-python3 p7zip-full android-sdk-libsparse-utils erofs-utils
         sudo apt -y autoremove --purge
         sudo apt -y autoclean
         sudo apt clean
@@ -59,7 +59,7 @@ jobs:
       run: |
         set -e
         cd ${GITHUB_WORKSPACE}/workspace
-        repo sync -j$(nproc --all)
+        repo sync -j$(nproc --all) -c --no-tags --no-clone-bundle --force-sync
         ls -al
     - name: Repopick Patches
       run: |
@@ -75,7 +75,7 @@ jobs:
       run: |
         set -e
         cd ${GITHUB_WORKSPACE}/workspace
-        git clone https://github.com/YuKongA/device_xiaomi_xaga-TWRP.git -b twrp-12.1 ./device/xiaomi/xaga
+        git clone https://github.com/reigadegr/device_xiaomi_xaga-TWRP.git -b twrp-12.1 ./device/xiaomi/xaga
     - name: Building
       run: |
         set -e
